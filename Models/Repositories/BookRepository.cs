@@ -19,11 +19,11 @@ namespace BookStore.Models.Repositories
                 },
                 new Book
                 {
-                    Id=1, Title="Java Programmin", Description="Nothing",
+                    Id=2, Title="Java Programmin", Description="Nothing",
                 },
                 new Book
                 {
-                    Id=1, Title="Python Programmin", Description="No data",
+                    Id=3, Title="Python Programmin", Description="No data",
                 },
             };
         }
@@ -40,7 +40,8 @@ namespace BookStore.Models.Repositories
 
         public Book Find(int id)
         {
-            var book= _books.SingleOrDefault(b => b.Id ==id);
+            // SingleOrDefault return the Only element 
+            var book = _books.SingleOrDefault(b => b.Id ==id);
             return book;
         }
 
