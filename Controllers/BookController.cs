@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BookStore.Models;
+using BookStore.Models.Repositories;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,10 +11,17 @@ namespace BookStore.Controllers
 {
     public class BookController : Controller
     {
+        private readonly IBookstoreRepository<Book> bookRepository;
+
+        public BookController(IBookstoreRepository<Book> bookRepository)
+        {
+            this.bookRepository = bookRepository;
+        }
         // GET: BookController
         public ActionResult Index()
         {
-            return View();
+            var books = bookRepository.List();
+            return View(books);
         }
 
         // GET: BookController/Details/5
