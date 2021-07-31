@@ -15,15 +15,18 @@ namespace BookStore.Models.Repositories
             {
                 new Book
                 {
-                    Id=1, Title="C# Programmin", Description="No description",
+                    Id=1, 
+                    Title="C# Programmin", 
+                    Description="No description", 
+                    Author = new Author{ Id = 2, }
                 },
                 new Book
                 {
-                    Id=2, Title="Java Programmin", Description="Nothing",
+                    Id=2, Title="Java Programmin", Description="Nothing", Author = new Author()
                 },
                 new Book
                 {
-                    Id=3, Title="Python Programmin", Description="No data",
+                    Id=3, Title="Python Programmin", Description="No data", Author = new Author()
                 },
             };
         }

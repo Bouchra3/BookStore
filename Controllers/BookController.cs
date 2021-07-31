@@ -72,16 +72,37 @@ namespace BookStore.Controllers
         // GET: BookController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var book = bookRepository.Find(id);
+            var authorId = book.Author == null ? book.Author.Id = 0 : book.Author.Id;
+
+            var viewModel = new BookAuthorViewModel
+            {
+                BookId = book.Id,
+                Title = book.Title,
+                Description = book.Description,
+                AuthorId = authorId,
+                Authors = authorRepository.List().ToList(),
+            };
+            return View(viewModel);
         }
 
         // POST: BookController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(BookAuthorViewModel viewModel)
         {
             try
             {
+                var author = authorRepository.Find(viewModel.AuthorId);
+                Book book = new Book
+                {
+                    Id = viewModel.BookId,
+                    Title = viewModel.Title,
+                    Description = viewModel.Description,
+                    Author = author
+                };
+
+                bookRepository.Update(viewModel.BookId, book);
                 return RedirectToAction(nameof(Index));
             }
             catch
